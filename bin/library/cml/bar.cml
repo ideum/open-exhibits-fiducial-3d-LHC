@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cml tuio="false" simulator="false" css="library/assets/styles.css">
+	
+	<Container id="bar" x="563" y="-174">
+		<Image id="5"width="794" height="174" visible="true" src="library/assets/bar/option5.png"></Image>
+		<Image id="4"width="794" height="174" visible="true" src="library/assets/bar/option4.png"></Image>
+		<Image id="3"width="794" height="174" visible="true" src="library/assets/bar/option3.png"></Image>
+		<Image id="2"width="794" height="174" visible="true" src="library/assets/bar/option2.png"></Image>
+		<Image id="1"width="794" height="174" visible="true" src="library/assets/bar/option1.png"></Image>
+    </Container>
+	
+</cml>

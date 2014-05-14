@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cml>
+	<TouchContainer3D id="model_container" mouseChildren="true">
+	
+		<!-- <LightPicker id="lp-1" lights="light-1, light-2, light-3" /> -->
+		<LightPicker id="lp-1" lights="light-1" />
+
+		<Scene id="main_scene" bgcolor="0x3E5167">
+			<Camera id="main_cam" x="0" y="100" z="-500" color="0x3E5167"/>
+			<!-- <Camera id="main_cam" pos="0,0,-1000" lens="prospective" color="0x444444" /> -->
+			 
+			<SkyBox>
+			    <Image width="1024" src="library/assets/sky/background_2048_right_logo.png"/>
+				<Image width="1024" src="library/assets/sky/background_2048_left_logo.png"/>
+				<Image width="1024" src="library/assets/sky/background_2048_top.png"/>
+				<Image width="1024" src="library/assets/sky/background_2048_bottom.png"/>
+				<Image width="1024" src="library/assets/sky/background_2048_center_logo.png"/>
+				<Image width="1024" src="library/assets/sky/background_2048_back_logo.png"/>
+			</SkyBox>
+
+			<Light id="light-1" ref="Directional" color="0xFFFFFF" castsShadows="true" x="0" y="0" z="-1500" rotationX="0" shadowType="soft" />
+			<!-- <Light id="light-1" ref="Directional" x="-200" y="100" z="-200" color="0xFFFFFF" />
+			<Light id="light-2" ref="Directional" x="200" y="200" z="200"color="0xFFFFFF" />
+			<Light id="light-3" ref="Directional" x="-200" y="0" z="100"color="0xFFFFFF" /> -->
+			
+			<!-- Textures -->
+			<Texture id="tex-1" ref="Bitmap" src="library/assets/model/materials/texture1.jpg" />
+			
+			<!-- Materials -->
+			<Material id="mat-1" ref="Texture" texture="#tex-1" />
+			
+			<Container3D id="main">
+			
+			<Container3D id='container01'>
+				<Model id="back_shell_left" name="shell8" src="library/assets/model/back_shell_left/back_shell_left_red.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+	
+			<Container3D id="container02">
+				<Model id="back_shell_right" name="shell7" material="#mat-1" src="library/assets/model/back_shell_right/back_shell_right_red.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>	
+		
+			<Container3D id="container03">
+				<Model id="central_shell_left" name="shell6" src="library/assets/model/central_shell_left/central_shell_left_blue.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container04">
+				<Model id="central_shell_right" name="shell5" src="library/assets/model/central_shell_right/central_shell_right_blue.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container05">
+				<Model id="inner_shell_left" name="shell4" src="library/assets/model/inner_shell_left/inner_shell_left.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container06">
+				<Model id="inner_shell_right" name="shell3" src="library/assets/model/inner_shell_right/inner_shell_right.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container07">
+				<Model id="outer_shell_left" name="shell1" src="library/assets/model/outer_shell_left/outer_shell_left.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container08">
+				<Model id="outer_shell_right" name="shell2" src="library/assets/model/outer_shell_right/outer_shell_right.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container09">
+				<Model id="engine" src="library/assets/model/engine/engine.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container10">
+				<Model id="engine_nose" src="library/assets/model/engine/engine_nose.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container11">
+				<Model id="engine_tail" src="library/assets/model/engine/engine_tail.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container12">
+				<Model id="rod" src="library/assets/model/engine/chrome_rod.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container13">
+				<Model id="rotor1" src="library/assets/model/engine/rotor1.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container14">
+				<Model id="wheel" src="library/assets/model/back_rotor/wheel.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container15">
+				<Model id="top_fins" src="library/assets/model/back_rotor/top_fins.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container16">
+				<Model id="bottom_fins" src="library/assets/model/back_rotor/bottom_fins.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container17">
+				<Model id="small_shell_top" src="library/assets/model/small_shell_top/small_shell_top.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container18">
+				<Model id="small_shell_bottom" src="library/assets/model/small_shell_bottom/small_shell_bottom.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id="container19">
+				<Model id="front_fan" name="frontFan" src="library/assets/model/front_fan/front_fan.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-scale-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			</Container3D>
+		</Scene>
+	</TouchContainer3D>
+</cml>

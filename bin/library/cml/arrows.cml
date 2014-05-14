@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cml tuio="false" simulator="false" css="library/assets/styles.css">
+
+	<LibraryKit>
+		<Library type="swf" src="library/assets/openexhibits_assets.swf" />
+	</LibraryKit>
+	
+	<StageKit fullscreen="true" />
+	
+	<Container id="arrows" visible="true">
+		<Gesture ref="n-drag"/>
+		<Image id="4" width="500" height="500" x="-250" y="-250" visible="true" mouseChildren="false" src="library/assets/dial/RotatingArrow.png"></Image>
+    </Container>
+	
+</cml>

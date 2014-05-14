@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cml tuio="false" simulator="false" css="library/assets/styles.css">
+	
+	<Container id="dial" visible="false" x="50" y="644">
+		<Gesture ref="n-drag"/>
+		<Gesture ref="n-rotate"/>
+		<Image id="4"width="500" height="386" visible="false" src="library/assets/dial/dial_option4.png"></Image>
+		<Image id="3"width="500" height="386" visible="false" src="library/assets/dial/dial_option3.png"></Image>
+		<Image id="2"width="500" height="386" visible="false" src="library/assets/dial/dial_option2.png"></Image>
+		<Image id="1"width="500" height="386" visible="true" src="library/assets/dial/dial_option1.png"></Image>
+    </Container>
+	
+</cml>

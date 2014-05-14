@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cml tuio="false" simulator="false">
+
+	<Stage fullscreen="true" />
+
+	<LibraryKit>
+		<Library type="swf" src="library/swfs/openexhibits_assets.swf" />	
+	</LibraryKit>
+
+	<!-- 3D Models, Nodes and Containers -->
+	<Include src="library/cml/model1.cml"/>
+	
+	<!-- Popup overlays for information -->
+	<Include src="library/cml/model-popups.cml"/>
+
+	<!-- Rotating Dial -->
+	<Include src="library/cml/point_dial.cml"/> 
+	
+	<!-- Directional Arrows -->
+	<Include src="library/cml/directionalArrows.cml"/> 
+
+	<!-- Info overlay -->
+	<Image id="info_overlay" width="128" height="128" x="1780" y="950" visible="true" src="library/assets/info/info_icon.png">
+		<Gesture ref="n-tap"/>
+	</Image>
+	
+	<!-- Info screen -->
+	<Include src="library/cml/info_screen.cml"/>
+
+</cml>

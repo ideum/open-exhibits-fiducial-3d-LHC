@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cml tuio="false" simulator="false" css="library/assets/styles.css">
+	
+	<Container id="info_screen" visible="true" mouseChildren="true">
+		<Gesture ref="n-tap"/>
+		<Image width="1920" height="1080" visible="true" src="library/assets/info/info_screen.png"/>
+		<Image id="info_screen_icon" width="128" height="128" x="1780" y="950" visible="true" src="library/assets/info/exit_icon_white.png">
+			<Gesture ref="n-tap"/>
+		</Image>
+    </Container>
+	
+</cml>

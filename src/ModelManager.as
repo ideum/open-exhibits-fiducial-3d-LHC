@@ -3,6 +3,8 @@ package
 	import away3d.cameras.Camera3D;
 	import away3d.containers.ObjectContainer3D;
 	import away3d.containers.Scene3D;
+	import away3d.containers.View3D;
+	import away3d.debug.AwayStats;
 	import away3d.core.partition.SkyBoxNode;
 	import away3d.primitives.SkyBox;
 	import away3d.textures.BitmapTexture;
@@ -46,17 +48,25 @@ package
 	
 	public class ModelManager extends Sprite 
 	{ 	
+		// set to true for debugging purposes
+		private var debug:Boolean = false;
+		
 		private var overlay:TouchSprite = new TouchSprite();
 		private var cam:Camera = new Camera();
 		private var model_container:TouchContainer3D;
+		//private var view:View3D;
 		
+		// Main container for moving whole model
 		private var main:ObjectContainer3D;
 
-		private var engine:Model;
-		private var rod:Model;
-		private var rotor1:Model;
-		private var engine_nose:Model;
-		private var engine_tail:Model;
+		// models for complex radial translation
+		private var outer_shell_yellow:Model;
+		private var outer_shell_red:Model;
+		private var pipes:Model;
+		private var muons2left:Model;
+		private var muons2right:Model;
+		private var innerShell:Model;
+		private var innerShellBlue:Model;
 		
 		private var minScale:Number = .25;
 		private var maxScale:Number = 4;
@@ -72,10 +82,7 @@ package
 		
 		// array of models for rotating each one independently
 		private var models:Array;
-		
-		//sample independent 3D model explosion
-		private var model:Model;
-		
+
 		// array of models for rotating each one independently
 		private var containers:Array;
 
@@ -85,7 +92,7 @@ package
 
 		// Elements for info screen 
 		private var info_overlay:Image = document.getElementById("info_overlay");
-		private var info_screen = document.getElementById("info_screen");
+		private var info_screen:Container = document.getElementById("info_screen");
 		private var info_screen_exit:Image = document.getElementById("info_screen_icon");
 		
 		// State of the UI element for rotating dial rotation degree
@@ -103,16 +110,14 @@ package
 		public function init():void 
 		{
 			// Construct main screen and gesture enabling
+			//view = document.getElementById("main_view");
+			stage.addChild(new AwayStats());
 			
 			// get model
 			model_container = document.getElementById("model_container");
-			model = document.getElementById("front_fan");
+
 			//Get Camera from scene
 			cam = document.getElementById("main_cam");
-			/*cam.x = -400;
-			cam.y = 200;
-			cam.z = -300;	
-			cam.lookAt( new Vector3D(0, 0, 0) );*/
 
 			// add touch overlay for fiducial gestures
 			stage.addChild(overlay);
@@ -133,12 +138,15 @@ package
 		
 			main = document.getElementById("main");
 			
-			engine = document.getElementById("engine");
-			/*rod = document.getElementById("rod");
-			rotor1 = document.getElementById("rotor1");
-			engine_nose = document.getElementById("engine_nose");
-			engine_tail = document.getElementById("engine_tail");*/
-				
+			// get elements for complex transitions
+			outer_shell_yellow = document.getElementById("outer_shell_yellow");
+			outer_shell_red = document.getElementById("outer_shell_red");
+			pipes = document.getElementById("pipes");
+			muons2left = document.getElementById("muons2left");
+			muons2right = document.getElementById("muons2right");
+			innerShell = document.getElementById("innerShell");
+			innerShellBlue = document.getElementById("innerShellBlue");
+	
 			// grab all of the cml popup elements
 			popups = document.getElementsByTagName(ModelPopup);
 			
@@ -148,43 +156,51 @@ package
 			// grab all of the 3D container elements
 			containers = document.getElementsByTagName(ObjectContainer3D);
 			
-			document.getElementById("back_shell_left").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("back_shell_left").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("back_shell_left").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			outer_shell_yellow.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			outer_shell_yellow.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			outer_shell_yellow.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
-			document.getElementById("back_shell_right").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("back_shell_right").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("back_shell_right").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			outer_shell_red.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			outer_shell_red.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			outer_shell_red.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
-			document.getElementById("central_shell_left").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("central_shell_left").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("central_shell_left").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			pipes.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			pipes.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			pipes.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
-			document.getElementById("central_shell_right").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("central_shell_right").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("central_shell_right").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
-			
-			document.getElementById("inner_shell_left").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("inner_shell_left").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("inner_shell_left").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
-		
-			document.getElementById("inner_shell_right").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("inner_shell_right").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("inner_shell_right").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
-			
-			document.getElementById("outer_shell_left").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("outer_shell_left").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("outer_shell_left").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
-
-			document.getElementById("outer_shell_right").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("outer_shell_right").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("outer_shell_right").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			document.getElementById("left_tube").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("left_tube").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("left_tube").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 	
-			document.getElementById("small_shell_top").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("small_shell_top").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("small_shell_top").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			document.getElementById("right_tube").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("right_tube").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("right_tube").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			
+			muons2left.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			muons2left.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			muons2left.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			
+			muons2right.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			muons2right.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			muons2right.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+		
+			innerShell.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			innerShell.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			innerShell.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			
+			innerShellBlue.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			innerShellBlue.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			innerShellBlue.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 
-			document.getElementById("small_shell_bottom").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("gearsLeft").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("gearsLeft").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("gearsLeft").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+	
+			document.getElementById("gearsRight").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("gearsRight").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("gearsRight").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+
+			/*document.getElementById("small_shell_bottom").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			document.getElementById("small_shell_bottom").vto.addEventListener(GWGestureEvent.SCALE, onScale);
 			document.getElementById("small_shell_bottom").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
@@ -205,7 +221,7 @@ package
 			
 			document.getElementById("front_fan").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			document.getElementById("front_fan").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("front_fan").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			document.getElementById("front_fan").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);*/
 				
 			//mainScreen.addEventListener(GWGestureEvent.TAP, onTap);
 			overlay.addEventListener(GWGestureEvent.ROTATE, onRotate);
@@ -246,10 +262,6 @@ package
 
 			// up our count
 			point_dial.rotationZ = dialValue;
-
-			// if it's 60, then stop
-			//if( this.m_currCount >= 60 )
-			//this.stage.removeEventListener( Event.ENTER_FRAME, this._onUpdate );
 		}
 		
 		private function onModelDrag(e:GWGestureEvent):void 
@@ -259,13 +271,13 @@ package
 			
 			if (e.value.n == 1)
 			{
-			  var val:Number = current_container.rotationX + e.value.drag_dy * .25;
+				var val:Number = current_container.rotationX + e.value.drag_dy * .25;
 			
-			  if (val < minRotationX) val = minRotationX;
-			  else if (val > maxRotationX) val = maxRotationX;
+				if (val < minRotationX) val = minRotationX;
+				else if (val > maxRotationX) val = maxRotationX;
 				
-			  current_container.rotationY -= e.value.drag_dx * .5;
-			  current_container.rotationX = val;
+				current_container.rotationY -= e.value.drag_dx * .5;
+				current_container.rotationX = val;
 			}
 		}
 		
@@ -283,37 +295,43 @@ package
 				{
 					var final_position:Number = 0;
 					
-					if (containers[i].id == "container01") 
+					if (containers[i].id == "container04") 
 					{
-						containers[i].moveForward(slowest_displacement);
-						final_position = containers[i].z;
-					    if (final_position < 0) containers[i].z = 0;
-					}
-					else if (containers[i].id == "container02") 
-					{
-						containers[i].moveBackward(slowest_displacement);
-						final_position = containers[i].z;
-					    if (final_position > 0) containers[i].z = 0;
-					}
-					else if (containers[i].id == "container03") 
-					{
-						containers[i].moveForward(slow_displacement);
-						final_position = containers[i].z;
-					    if (final_position < 0) containers[i].z = 0;
-					}
-					else if (containers[i].id == "container04") 
-					{
-						containers[i].moveBackward(slow_displacement);	
-						final_position = containers[i].z;
-					    if (final_position > 0) containers[i].z = 0;
+						containers[i].moveLeft(fastest_displacement);
+						final_position = containers[i].x;
+					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container05") 
 					{
-						containers[i].moveForward(fast_displacement);
-						final_position = containers[i].z;
-					    if (final_position < 0) containers[i].z = 0;
+						containers[i].moveRight(fastest_displacement);
+						final_position = containers[i].x;
+					    if (final_position < 0) containers[i].x = 0;
 					}
-					else if (containers[i].id == "container06") 
+					else if (containers[i].id == "container07") 
+					{
+						containers[i].moveLeft(fast_displacement);
+						final_position = containers[i].x;
+					    if (final_position > 0) containers[i].x = 0;
+					}
+					else if (containers[i].id == "container08") 
+					{
+						containers[i].moveRight(fast_displacement);
+						final_position = containers[i].x;
+					    if (final_position < 0) containers[i].x = 0;
+					}
+					else if (containers[i].id == "container11") 
+					{
+						containers[i].moveLeft(slow_displacement);	
+						final_position = containers[i].x;2
+					    if (final_position > 0) containers[i].x = 0;
+					}
+					else if (containers[i].id == "container12") 
+					{
+						containers[i].moveRight(slow_displacement);
+						final_position = containers[i].x;
+					    if (final_position < 0) containers[i].x = 0;
+					}
+					/*else if (containers[i].id == "container06") 
 					{
 						containers[i].moveBackward(fast_displacement);
 						final_position = containers[i].z;
@@ -360,14 +378,29 @@ package
 						containers[i].moveLeft(fast_displacement);
 						final_position = containers[i].x;
 						if (final_position > 0) containers[i].x = 0;
-					}
+					}*/
 				}
+				
+				explodeRadialModelYZ(outer_shell_yellow, fast_displacement);
+				explodeRadialModelYZ(outer_shell_red, fastest_displacement);
+				explodeRadialModelYZ(pipes, fast_displacement);
+				explodeRadialModelYZ(muons2left, fastest_displacement);
+				explodeRadialModelYZ(muons2right, fastest_displacement);
+				explodeRadialModelYZ(innerShell, slow_displacement);
+				explodeRadialModelYZ(innerShellBlue, slow_displacement);
 				
 				// re-orient the containers back to their original orientation
 				// negates viewer interaction and rotation
 				if (e.value.rotate_dthetaZ < -10.0)
 				{
 					reOrderContainers();
+					implodeRadialModelYZ(outer_shell_yellow);
+					implodeRadialModelYZ(outer_shell_red);
+					implodeRadialModelYZ(pipes);
+					implodeRadialModelYZ(muons2left);
+					implodeRadialModelYZ(muons2right);
+					implodeRadialModelYZ(innerShell);
+					implodeRadialModelYZ(innerShellBlue);
 				}
 
 				// draw rotating dial animation
@@ -482,14 +515,10 @@ package
 				
 		private function reOrderContainers():void
 		{
-			//var popup:ModelPopup = document.getElementById(e.target.vto.name);
-			
-			
-			// TODO: Issues with independent models rotating properly
 			for (var i:int = 0; i < containers.length; i++) 
 			{
 				
-				if (containers[i].id != "main") 
+				if (containers[i].id != "main" && containers[i].id != "main_cam" && containers[i].id != "light-1") 
 				{
 					trace("Container = " + containers[i].id  + ", z location = ", + containers[i].z);
 					TweenLite.to(containers[i], 3, { rotationX:0 } );
@@ -497,19 +526,138 @@ package
 					TweenLite.to(containers[i], 3, { rotationZ:0 } );
 					TweenLite.to(containers[i], 3, { x:0 } );
 					TweenLite.to(containers[i], 3, { y:0 } );
-					
-					// Issue with z-axis re-orientation...
-					//TweenLite.to(containers[i], 1, { z:0 } );
+					TweenLite.to(containers[i], 1, { z:0 } );
 				}
 			}
 		}	
 		
-		private function explodeComplexModel(whole_model: Container):void 
+		private function implodeRadialModelYZ(whole_model:Model):void 
 		{
-			for (var i:int = 0; i < whole_model.length; i++) 
+			for (var i:int = 0; i < whole_model.numChildren; i++) 
 			{
-				
+				// return all radial elements to the center
+				TweenLite.to(whole_model.getChildAt(i), 3, { y:0 } );
+				TweenLite.to(whole_model.getChildAt(i), 3, { z:0 } );
 			}
+		}	
+		
+		private function explodeRadialModelYZ(whole_model:Model, displacement:Number):void 
+		{
+			// starting point of first radial element (at 180 for this demo)
+			// set the starting angle of your index[0] element
+			// e.g: if you first radial element is straight up, set to 90
+			var totalRotation:Number = 180.0;
+			
+			// gets the total number of elements
+			var degree:int = whole_model.numChildren;
+			
+			// sets the degree amount between elements
+			var spacer:Number = 360 / degree;
+			
+			// amount to change on eah call (based on user input rotation)
+			var newZ:Number = 0;
+			var newY:Number = 0;
+			
+			// loop through each of the elements in the model
+			for (var i:int = 0; i < degree; i++) 
+			{
+				// swith to radians for cosine and sine calculations
+				var radianValue = radians(totalRotation);
+				
+				newZ = (displacement * ((-1)*Math.cos(radianValue)));
+				newY = (displacement * Math.sin(radianValue));
+				
+				if (debug)
+				{
+				  trace(" ");
+				  trace("Sin totalRotation = " + Math.sin(radianValue));
+				  trace("Cos totalRotation = " + Math.cos(radianValue));
+				  trace("total rotation = " + totalRotation);
+				  trace("New z = " + newZ);
+				  trace("New y = " + newY);
+				  trace(whole_model.getChildAt(i).id);
+				  trace(whole_model.getChildAt(i).name);
+				}
+				
+				whole_model.getChildAt(i).y += newY;
+				whole_model.getChildAt(i).z += newZ;
+				
+				// limit objects to starting vertical position upon reverse motion
+				if (totalRotation < 180 && whole_model.getChildAt(i).y < 0) whole_model.getChildAt(i).y = 0;
+				if (totalRotation > 180 && whole_model.getChildAt(i).y > 0) whole_model.getChildAt(i).y = 0;
+				
+				// limit objects to starting horizontal position upon reverse motion
+				if ((totalRotation < 90 || totalRotation > 270) && whole_model.getChildAt(i).z > 0) whole_model.getChildAt(i).z = 0;
+				if (totalRotation > 90 && totalRotation < 270 && whole_model.getChildAt(i).z < 0) whole_model.getChildAt(i).z = 0;
+
+				// decrease the degrees as you move through elements
+				// for this demo, elements were arranged in increasing fashion going clockwise, 
+				// thus the negative, counterclockwise would be positive
+				totalRotation -= spacer;
+				if (totalRotation <= 0) totalRotation = 360;
+			}
+		}
+	
+		/*private function explodeRadialModelYX(whole_model:Model, displacement:Number):void 
+		{
+			// starting point of first radial element (at 180 for this demo)
+			// set the starting angle of your index[0] element
+			// e.g: if you first radial element is straight up, set to 90
+			var totalRotation:Number = 180.0;
+			
+			// gets the total number of elements
+			var degree:int = whole_model.numChildren;
+			
+			// sets the degree amount between elements
+			var spacer:Number = 360 / degree;
+			
+			// amount to change on eah call (based on user input rotation)
+			var newZ:Number = 0;
+			var newY:Number = 0;
+			
+			// loop through each of the elements in the model
+			for (var i:int = 0; i < degree; i++) 
+			{
+				// swith to radians for cosine and sine calculations
+				var radianValue = radians(totalRotation);
+				
+				newZ = (displacement * ((-1)*Math.cos(radianValue)));
+				newX = (displacement * Math.sin(radianValue));
+				
+				if (debug)
+				{
+				  trace(" ");
+				  trace("Sin totalRotation = " + Math.sin(radianValue));
+				  trace("Cos totalRotation = " + Math.cos(radianValue));
+				  trace("total rotation = " + totalRotation);
+				  trace("New x = " + newX);
+				  trace("New y = " + newY);
+				  trace(whole_model.getChildAt(i).id);
+				  trace(whole_model.getChildAt(i).name);
+				}
+				
+				whole_model.getChildAt(i).y += newY;
+				whole_model.getChildAt(i).x += newX;
+				
+				// limit objects to starting vertical position upon reverse motion
+				if (totalRotation < 180 && whole_model.getChildAt(i).y < 0) whole_model.getChildAt(i).y = 0;
+				if (totalRotation > 180 && whole_model.getChildAt(i).y > 0) whole_model.getChildAt(i).y = 0;
+				
+				// limit objects to starting horizontal position upon reverse motion
+				if ((totalRotation < 90 || totalRotation > 270) && whole_model.getChildAt(i).x > 0) whole_model.getChildAt(i).x = 0;
+				if (totalRotation > 90 && totalRotation < 270 && whole_model.getChildAt(i).x < 0) whole_model.getChildAt(i).x = 0;
+
+				// decrease the degrees as you move through elements
+				// for this demo, elements were arranged in increasing fashion going clockwise, 
+				// thus the negative, counterclockwise would be positive
+				totalRotation -= spacer;
+				if (totalRotation <= 0) totalRotation = 360;
+			}
+		}*/
+		
+		private function radians(degrees:Number):Number
+		{
+			return degrees * Math.PI / 180;
 		}
 	}		
 }

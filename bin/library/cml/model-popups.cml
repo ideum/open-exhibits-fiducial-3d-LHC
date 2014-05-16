@@ -92,4 +92,14 @@
 	<Gesture ref="n-tap" />
 </ModelPopup>
 
+<ModelPopup id="shell5" width="500" height="475">
+	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
+	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Inner inner shell" />
+	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
+		str="Inner Inner Shell Popup" />	
+	<Include src="library/cml/buttons/close-button.cml"/>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-tap" />
+</ModelPopup>
+
 </cml>

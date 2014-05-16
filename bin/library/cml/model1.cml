@@ -133,6 +133,15 @@
 					<Gesture ref="n-drag"/>
 				</Model>
 			</Container3D>
+			
+			<Container3D id='container13'>
+				<Model id="inner_inner_shell" name="shell5" src="library/assets/model/inner_inner_shell/inner_inner_shell.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
 	
 			</Container3D>
 		</Scene>

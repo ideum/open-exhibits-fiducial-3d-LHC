@@ -67,6 +67,7 @@ package
 		private var muons2right:Model;
 		private var innerShell:Model;
 		private var innerShellBlue:Model;
+		private var inner_inner_shell:Model;
 		
 		private var minScale:Number = .25;
 		private var maxScale:Number = 4;
@@ -146,7 +147,7 @@ package
 			muons2right = document.getElementById("muons2right");
 			innerShell = document.getElementById("innerShell");
 			innerShellBlue = document.getElementById("innerShellBlue");
-	
+			inner_inner_shell = document.getElementById("inner_inner_shell");
 			// grab all of the cml popup elements
 			popups = document.getElementsByTagName(ModelPopup);
 			
@@ -200,11 +201,11 @@ package
 			document.getElementById("gearsRight").vto.addEventListener(GWGestureEvent.SCALE, onScale);
 			document.getElementById("gearsRight").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 
-			/*document.getElementById("small_shell_bottom").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("small_shell_bottom").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("small_shell_bottom").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
-			document.getElementById("engine").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			/*document.getElementById("engine").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			document.getElementById("engine").vto.addEventListener(GWGestureEvent.SCALE, onScale);
 			
 			document.getElementById("engine_nose").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
@@ -285,10 +286,14 @@ package
 		{
 			if (e.value.n == 5)
 			{
-				var fastest_displacement:Number = e.value.rotate_dthetaZ * 5;
-				var fast_displacement:Number = e.value.rotate_dthetaZ * 4;
-				var slow_displacement:Number = e.value.rotate_dthetaZ * 2;
-				var slowest_displacement:Number = e.value.rotate_dthetaZ * 1;
+				var displacement_8:Number = e.value.rotate_dthetaZ * 8;
+				var displacement_7:Number = e.value.rotate_dthetaZ * 7;
+				var displacement_6:Number = e.value.rotate_dthetaZ * 6;
+				var displacement_5:Number = e.value.rotate_dthetaZ * 5;
+				var displacement_4:Number = e.value.rotate_dthetaZ * 4;
+				var displacement_3:Number = e.value.rotate_dthetaZ * 3;
+				var displacement_2:Number = e.value.rotate_dthetaZ * 2;
+				var displacement_1:Number = e.value.rotate_dthetaZ * 1;
 				var curr_position:Vector3D = main.scenePosition;
 				
 				for (var i:int = 0; i < containers.length; i++)
@@ -297,37 +302,37 @@ package
 					
 					if (containers[i].id == "container04") 
 					{
-						containers[i].moveLeft(fastest_displacement);
+						containers[i].moveLeft(displacement_3);
 						final_position = containers[i].x;
 					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container05") 
 					{
-						containers[i].moveRight(fastest_displacement);
+						containers[i].moveRight(displacement_3);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container07") 
 					{
-						containers[i].moveLeft(fast_displacement);
+						containers[i].moveLeft(displacement_2);
 						final_position = containers[i].x;
 					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container08") 
 					{
-						containers[i].moveRight(fast_displacement);
+						containers[i].moveRight(displacement_2);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container11") 
 					{
-						containers[i].moveLeft(slow_displacement);	
+						containers[i].moveLeft(displacement_1);	
 						final_position = containers[i].x;2
 					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container12") 
 					{
-						containers[i].moveRight(slow_displacement);
+						containers[i].moveRight(displacement_1);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
@@ -381,13 +386,14 @@ package
 					}*/
 				}
 				
-				explodeRadialModelYZ(outer_shell_yellow, fast_displacement);
-				explodeRadialModelYZ(outer_shell_red, fastest_displacement);
-				explodeRadialModelYZ(pipes, fast_displacement);
-				explodeRadialModelYZ(muons2left, fastest_displacement);
-				explodeRadialModelYZ(muons2right, fastest_displacement);
-				explodeRadialModelYZ(innerShell, slow_displacement);
-				explodeRadialModelYZ(innerShellBlue, slow_displacement);
+				explodeRadialModelYZ(outer_shell_yellow, displacement_5);
+				explodeRadialModelYZ(outer_shell_red, displacement_4);
+				explodeRadialModelYZ(pipes, displacement_4);
+				explodeRadialModelYZ(muons2left, displacement_3);
+				explodeRadialModelYZ(muons2right, displacement_3);
+				explodeRadialModelYZ(innerShell, displacement_3);
+				explodeRadialModelYZ(innerShellBlue, displacement_2);
+				explodeRadialModelYZ(inner_inner_shell, displacement_1);
 				
 				// re-orient the containers back to their original orientation
 				// negates viewer interaction and rotation
@@ -401,6 +407,7 @@ package
 					implodeRadialModelYZ(muons2right);
 					implodeRadialModelYZ(innerShell);
 					implodeRadialModelYZ(innerShellBlue);
+					implodeRadialModelYZ(inner_inner_shell);
 				}
 
 				// draw rotating dial animation

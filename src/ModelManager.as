@@ -68,6 +68,7 @@ package
 		private var innerShell:Model;
 		private var innerShellBlue:Model;
 		private var inner_inner_shell:Model;
+		private var blocks:Model;
 		
 		private var minScale:Number = .25;
 		private var maxScale:Number = 4;
@@ -148,6 +149,8 @@ package
 			innerShell = document.getElementById("innerShell");
 			innerShellBlue = document.getElementById("innerShellBlue");
 			inner_inner_shell = document.getElementById("inner_inner_shell");
+			blocks = document.getElementById("blocks");
+			
 			// grab all of the cml popup elements
 			popups = document.getElementsByTagName(ModelPopup);
 			
@@ -192,6 +195,10 @@ package
 			innerShellBlue.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			innerShellBlue.vto.addEventListener(GWGestureEvent.SCALE, onScale);
 			innerShellBlue.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			
+			blocks.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			blocks.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			blocks.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 
 			document.getElementById("gearsLeft").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			document.getElementById("gearsLeft").vto.addEventListener(GWGestureEvent.SCALE, onScale);
@@ -204,6 +211,30 @@ package
 			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.SCALE, onScale);
 			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			
+			document.getElementById("inner_ringFront").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("inner_ringFront").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("inner_ringFront").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+
+			document.getElementById("inner_ringBack").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("inner_ringBack").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("inner_ringBack").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			
+			document.getElementById("inner_inner_ringFront").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("inner_inner_ringFront").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("inner_inner_ringFront").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+
+			document.getElementById("inner_inner_ringBack").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("inner_inner_ringBack").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("inner_inner_ringBack").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			
+			document.getElementById("inner_ringLeft").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("inner_ringLeft").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("inner_ringLeft").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+
+			document.getElementById("inner_ringRight").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("inner_ringRight").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("inner_ringRight").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
 			/*document.getElementById("engine").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			document.getElementById("engine").vto.addEventListener(GWGestureEvent.SCALE, onScale);
@@ -302,65 +333,77 @@ package
 					
 					if (containers[i].id == "container04") 
 					{
-						containers[i].moveLeft(displacement_3);
+						containers[i].moveLeft(displacement_5);
 						final_position = containers[i].x;
 					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container05") 
 					{
-						containers[i].moveRight(displacement_3);
+						containers[i].moveRight(displacement_5);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container07") 
 					{
-						containers[i].moveLeft(displacement_2);
+						containers[i].moveLeft(displacement_4);
 						final_position = containers[i].x;
 					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container08") 
 					{
-						containers[i].moveRight(displacement_2);
+						containers[i].moveRight(displacement_4);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container11") 
 					{
-						containers[i].moveLeft(displacement_1);	
+						containers[i].moveLeft(displacement_3);	
 						final_position = containers[i].x;2
 					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container12") 
 					{
+						containers[i].moveRight(displacement_3);
+						final_position = containers[i].x;
+					    if (final_position < 0) containers[i].x = 0;
+					}
+					else if (containers[i].id == "container14") 
+					{
+						containers[i].moveForward(displacement_2);
+						final_position = containers[i].z;
+					    if (final_position < 0) containers[i].z = 0;
+					}
+					else if (containers[i].id == "container15") 
+					{
+						containers[i].moveBackward(displacement_2);
+						final_position = containers[i].z;
+					    if (final_position > 0) containers[i].z = 0;
+					}
+					else if (containers[i].id == "container16") 
+					{
+						containers[i].moveForward(displacement_2);
+						final_position = containers[i].z;
+					    if (final_position < 0) containers[i].z = 0;
+					}
+					else if (containers[i].id == "container17") 
+					{
+						containers[i].moveBackward(displacement_2);
+						final_position = containers[i].z;
+					    if (final_position > 0) containers[i].z = 0;
+					}
+					else if (containers[i].id == "container19") 
+					{
+						containers[i].moveLeft(displacement_1);
+						final_position = containers[i].z;
+					    if (final_position > 0) containers[i].z = 0;
+					}
+					else if (containers[i].id == "container20")
+					{
 						containers[i].moveRight(displacement_1);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
-					/*else if (containers[i].id == "container06") 
-					{
-						containers[i].moveBackward(fast_displacement);
-						final_position = containers[i].z;
-					    if (final_position > 0) containers[i].z = 0;
-					}
-					else if (containers[i].id == "container07") 
-					{
-						containers[i].moveBackward(fastest_displacement);
-						final_position = containers[i].z;
-					    if (final_position > 0) containers[i].z = 0;
-					}
-					else if (containers[i].id == "container08") 
-					{
-						containers[i].moveForward(fastest_displacement);
-						final_position = containers[i].z;
-					    if (final_position < 0) containers[i].z = 0;
-					}
-					else if (containers[i].id == "container10") 
-					{
-						containers[i].moveLeft(fastest_displacement);
-						final_position = containers[i].x;
-					    if (final_position > 0) containers[i].x = 0;
-					}
-					else if (containers[i].id == "container11") 
+					/*else if (containers[i].id == "container11") 
 					{
 						containers[i].moveRight(fast_displacement);
 						final_position = containers[i].x;
@@ -386,14 +429,15 @@ package
 					}*/
 				}
 				
-				explodeRadialModelYZ(outer_shell_yellow, displacement_5);
-				explodeRadialModelYZ(outer_shell_red, displacement_4);
-				explodeRadialModelYZ(pipes, displacement_4);
-				explodeRadialModelYZ(muons2left, displacement_3);
-				explodeRadialModelYZ(muons2right, displacement_3);
-				explodeRadialModelYZ(innerShell, displacement_3);
-				explodeRadialModelYZ(innerShellBlue, displacement_2);
-				explodeRadialModelYZ(inner_inner_shell, displacement_1);
+				explodeRadialModelYZ(outer_shell_yellow, displacement_6);
+				explodeRadialModelYZ(outer_shell_red, displacement_5);
+				explodeRadialModelYZ(pipes, displacement_5);
+				explodeRadialModelYZ(muons2left, displacement_4);
+				explodeRadialModelYZ(muons2right, displacement_4);
+				explodeRadialModelYZ(innerShell, displacement_4);
+				explodeRadialModelYZ(innerShellBlue, displacement_3);
+				explodeRadialModelYZ(inner_inner_shell, displacement_2);
+				explodeRadialModelYZ(blocks, displacement_3);
 				
 				// re-orient the containers back to their original orientation
 				// negates viewer interaction and rotation
@@ -408,6 +452,7 @@ package
 					implodeRadialModelYZ(innerShell);
 					implodeRadialModelYZ(innerShellBlue);
 					implodeRadialModelYZ(inner_inner_shell);
+					implodeRadialModelYZ(blocks);
 				}
 
 				// draw rotating dial animation

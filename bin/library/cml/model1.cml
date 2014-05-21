@@ -36,7 +36,7 @@
 			</Container3D>
 			
 			<Container3D id='container02'>
-				<Model id="outer_shell_red" name="shell2" src="library/assets/model/outer_shell/outer_shell_red.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="outer_shell_red" name="muon_detector" src="library/assets/model/outer_shell/outer_shell_red.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -72,7 +72,7 @@
 			</Container3D>
 			
 			<Container3D id='container06'>
-				<Model id="pipes" name="pipesPopup" src="library/assets/model/pipes/pipes.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="pipes" name="toroid_magnets" src="library/assets/model/pipes/pipes.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -81,7 +81,7 @@
 			</Container3D>
 			
 			<Container3D id='container07'>
-				<Model id="muons2left" name="muonPopup" src="library/assets/model/muon_detectors2/muon_detectors2_left.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="muons2left" name="muon_detector" src="library/assets/model/muon_detectors2/muon_detectors2_left.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -90,7 +90,7 @@
 			</Container3D>
 			
 			<Container3D id='container08'>
-				<Model id="muons2right" name="muonPopup" src="library/assets/model/muon_detectors2/muon_detectors2_right.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="muons2right" name="muon_detector" src="library/assets/model/muon_detectors2/muon_detectors2_right.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -99,7 +99,7 @@
 			</Container3D>
 			
 			<Container3D id='container09'>
-				<Model id="innerShell" name="shell3" src="library/assets/model/inner_shell/inner_shell_red.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="innerShell" name="muon_detector" src="library/assets/model/inner_shell/inner_shell_red.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -117,7 +117,7 @@
 			</Container3D>
 			
 			<Container3D id='container11'>
-				<Model id="gearsLeft" name="gearsPopup" src="library/assets/model/gears/left.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="gearsLeft" name="toroid_magnets" src="library/assets/model/gears/left.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -126,7 +126,7 @@
 			</Container3D>
 			
 			<Container3D id='container12'>
-				<Model id="gearsRight" name="gearsPopup" src="library/assets/model/gears/right.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="gearsRight" name="toroid_magnets" src="library/assets/model/gears/right.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -135,7 +135,7 @@
 			</Container3D>
 			
 			<Container3D id='container13'>
-				<Model id="inner_inner_shell" name="shell5" src="library/assets/model/inner_inner_shell/inner_inner_shell.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="inner_inner_shell" name="muon_detector" src="library/assets/model/inner_inner_shell/inner_inner_shell.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -143,6 +143,69 @@
 				</Model>
 			</Container3D>
 	
+			<Container3D id='container14'>
+				<Model id="inner_ringBack" name="tile_calorimeter" src="library/assets/model/inner_ring/inner_ringBack.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id='container15'>
+				<Model id="inner_ringFront" name="tile_calorimeter" src="library/assets/model/inner_ring/inner_ringFront.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id='container16'>
+				<Model id="inner_inner_ringBack" name="tile_calorimeter" src="library/assets/model/inner_ring/inner_inner_ringBack.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id='container17'>
+				<Model id="inner_inner_ringFront" name="tile_calorimeter" src="library/assets/model/inner_ring/inner_inner_ringFront.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id='container18'>
+				<Model id="blocks" name="blocksPopup" src="library/assets/model/blocks/blocks.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+				<Container3D id='container19'>
+				<Model id="inner_ringLeft" name="inner_gears" src="library/assets/model/inner_ring/inner_ringLeft.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id='container20'>
+				<Model id="inner_ringRight" name="inner_gears" src="library/assets/model/inner_ring/inner_ringRight.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
 			</Container3D>
 		</Scene>
 	</TouchContainer3D>

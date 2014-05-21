@@ -42,11 +42,26 @@
 	<Gesture ref="n-tap" />
 </ModelPopup>
 
-<ModelPopup id="muonPopup" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Muon Detector" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="This is the Muon Detector Popup" />	
+<ModelPopup id="muon_detector" width="525" height="550">
+	<Graphic shape="rectangle" width="525" height="550" color="0xff00cc" lineStroke="0" alpha=".8"/>
+	<Text fontSize="18" x="20" y="20" width="500" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Muon Detector (or Compact Muon Solenoid - CMS)" />
+	<Text fontSize="18" x="20" y="65" width="465" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true">	
+		<p>As the name “Compact Muon Solenoid” suggests, detecting muons is one of CMS’s 
+		most important tasks. Muons are charged particles that are just like electrons and 
+		positrons, but are 200 times heavier. We expect them to be produced in the decay 
+		of a number of potential new particles; for instance, one of the clearest "signatures" 
+		of the Higgs Boson is its decay into four muons.<br /></p>
+		<p>Because muons can penetrate several metres of iron without interacting, unlike
+		most particles they are not stopped by any of CMS's calorimeters. Therefore, 
+		chambers to detect muons are placed at the very edge of the experiment where 
+		they are the only particles likely to register a signal.<br /></p>
+		<p>In total there are 1400 muon chambers: 250 drift tubes (DTs) and 540 cathode 
+		strip chambers (CSCs) track the particles’ positions and provide a trigger, 
+		while 610 resistive plate chambers (RPCs) form a redundant trigger system, 
+		which quickly decides to keep the acquired muon data or not. Because of the many 
+		layers of detector and different specialities of each type, the system is naturally
+		robust and able to filter out background noise.</p>
+	</Text>
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
 	<Gesture ref="n-tap" />
@@ -82,11 +97,20 @@
 	<Gesture ref="n-tap" />
 </ModelPopup>
 
-<ModelPopup id="gearsPopup" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Gears" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="Gears Popup" />	
+<ModelPopup id="toroid_magnets" width="500" height="500">
+	<Graphic shape="rectangle" width="500" height="500" color="0xff00cc" lineStroke="0" alpha=".8"/>
+	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Toroid Magnet" />
+	<Text fontSize="18" x="20" y="45" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true">
+		<p>A toroid is a coil of insulated or enameled wire wound on a donut-shaped form made of 
+		powdered iron. A toroid is used as an inductor in electronic circuits, especially  at low 
+		frequencies where comparatively large inductances are necessary.<br /></p>
+		<p>In the Large Hadron Collider, the outer toroidal magnetic field is produced by eight 
+		very large air-core superconducting barrel loops and two end-caps air toroidal magnets, 
+		all situated outside the calorimeters and within the muon detector system. This magnetic 
+		field extends in an area 26 metres long and 20 metres in diameter, and it stores 1.6 gigajoules 
+		of energy. Its magnetic field is not uniform, because a solenoid magnet of sufficient size 
+		would be prohibitively expensive to build. It varies between 2 and 8 Teslameters.</p>	
+    </Text>
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
 	<Gesture ref="n-tap" />
@@ -97,6 +121,44 @@
 	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Inner inner shell" />
 	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
 		str="Inner Inner Shell Popup" />	
+	<Include src="library/cml/buttons/close-button.cml"/>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-tap" />
+</ModelPopup>
+
+<ModelPopup id="tile_calorimeter" width="500" height="475">
+	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
+	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Tile Calorimeter" />
+	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true">	
+		<p>	The calorimeter measures the energies of charged and neutral particles. 
+		It consists of metal plates (absorbers) and sensing elements. Interactions 
+		in the absorbers transform the incident energy into a "shower" of particles 
+		that are detected by the sensing elements.<br /></p>
+		<p>In the inner sections of the calorimeter, the sensing element is liquid argon. 
+		The showers in the argon liberate electrons that are collected and recorded.<br /></p>
+		<p>In the outer sections, the sensors are tiles of scintillating plastic. The showers 
+		cause the plastic to emit light which is detected and recorded.</p>
+	</Text>
+	<Include src="library/cml/buttons/close-button.cml"/>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-tap" />
+</ModelPopup>
+
+<ModelPopup id="blocksPopup" width="500" height="475">
+	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
+	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Blocks" />
+	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
+		str="Blocks" />	
+	<Include src="library/cml/buttons/close-button.cml"/>
+	<Gesture ref="n-drag" />
+	<Gesture ref="n-tap" />
+</ModelPopup>
+
+<ModelPopup id="inner_gears" width="500" height="475">
+	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
+	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Inner Gears" />
+	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
+		str="Inner Gears" />	
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
 	<Gesture ref="n-tap" />

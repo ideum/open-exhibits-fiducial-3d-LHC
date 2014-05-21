@@ -60,8 +60,7 @@ package
 		private var main:ObjectContainer3D;
 
 		// models for complex radial translation
-		private var outer_shell_yellow:Model;
-		private var outer_shell_red:Model;
+		private var outer_shell:Model;
 		private var pipes:Model;
 		private var muons2left:Model;
 		private var muons2right:Model;
@@ -127,8 +126,6 @@ package
 			// Add model to 3D scene 
 			overlay.addChild(model_container);
 			
-
-		
 			// add child gestures
 			overlay.mouseChildren = true;
 			overlay.clusterBubbling = true;
@@ -143,8 +140,7 @@ package
 			main = document.getElementById("main");
 			
 			// get elements for complex transitions
-			outer_shell_yellow = document.getElementById("outer_shell_yellow");
-			outer_shell_red = document.getElementById("outer_shell_red");
+			outer_shell = document.getElementById("outer_shell");
 			pipes = document.getElementById("pipes");
 			muons2left = document.getElementById("muons2left");
 			muons2right = document.getElementById("muons2right");
@@ -168,13 +164,9 @@ package
 			// grab all of the 3D container elements
 			containers = document.getElementsByTagName(ObjectContainer3D);
 			
-			outer_shell_yellow.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			outer_shell_yellow.vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			outer_shell_yellow.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
-			
-			outer_shell_red.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			outer_shell_red.vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			outer_shell_red.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			outer_shell.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			outer_shell.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			outer_shell.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
 			pipes.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			pipes.vto.addEventListener(GWGestureEvent.SCALE, onScale);
@@ -208,13 +200,9 @@ package
 			blocks.vto.addEventListener(GWGestureEvent.SCALE, onScale);
 			blocks.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 
-			document.getElementById("gearsLeft").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("gearsLeft").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("gearsLeft").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
-	
-			document.getElementById("gearsRight").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("gearsRight").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("gearsRight").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			document.getElementById("gears").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("gears").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("gears").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 
 			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.SCALE, onScale);
@@ -324,14 +312,17 @@ package
 				for (var i:int = 0; i < containers.length; i++)
 				{
 					var final_position:Number = 0;
+					var centralModel:Model;
+					var childrenCount:int;
+					var j:int;
 					
 					if (containers[i].id == "container03") 
 					{
-						var centralModel:Model = containers[i].getChildAt(0);
-						var childrenCount:int = centralModel.numChildren;
+						centralModel = containers[i].getChildAt(0);
+						childrenCount = centralModel.numChildren;
 					
 						// loop through each of the elements in the model
-						for (var j:int = 0; j < childrenCount; j++) 
+						for (j = 0; j < childrenCount; j++) 
 						{
 							if (j == 5) 
 							{
@@ -359,7 +350,7 @@ package
 							}
 						}
 					}
-					if (containers[i].id == "container04") 
+					else if (containers[i].id == "container04") 
 					{
 						containers[i].moveLeft(displacement_10);
 						final_position = containers[i].x;
@@ -385,9 +376,25 @@ package
 					}
 					else if (containers[i].id == "container11") 
 					{
-						containers[i].moveLeft(displacement_8);	
-						final_position = containers[i].x;2
-					    if (final_position > 0) containers[i].x = 0;
+						centralModel = containers[i].getChildAt(0);
+						childrenCount = centralModel.numChildren;
+					
+						// loop through each of the elements in the model
+						for (j = 0; j < childrenCount; j++) 
+						{
+							if (j == 0) 
+							{
+								centralModel.getChildAt(j).x += displacement_3;
+								final_position = centralModel.getChildAt(j).x;
+								if (final_position < 0) centralModel.getChildAt(j).x = 0;
+							}
+							else if (j == 1) 
+							{
+								centralModel.getChildAt(j).x -= displacement_3;
+								final_position = centralModel.getChildAt(j).x;
+								if (final_position > 0) centralModel.getChildAt(j).x = 0;
+							}
+						}
 					}
 					else if (containers[i].id == "container12") 
 					{
@@ -397,11 +404,11 @@ package
 					}
 					else if (containers[i].id == "container14") 
 					{
-						var centralModel:Model = containers[i].getChildAt(0);
-						var childrenCount:int = centralModel.numChildren;
+						centralModel = containers[i].getChildAt(0);
+						childrenCount = centralModel.numChildren;
 					
 						// loop through each of the elements in the model
-						for (var j:int = 0; j < childrenCount; j++) 
+						for (j = 0; j < childrenCount; j++) 
 						{
 							if (j == 0) 
 							{
@@ -443,11 +450,11 @@ package
 					}
 					else if (containers[i].id == "container21") 
 					{
-						var centralModel:Model = containers[i].getChildAt(0);
-						var childrenCount:int = centralModel.numChildren;
+						centralModel = containers[i].getChildAt(0);
+						childrenCount = centralModel.numChildren;
 					
 						// loop through each of the elements in the model
-						for (var j:int = 0; j < childrenCount; j++) 
+						for (j = 0; j < childrenCount; j++) 
 						{
 							if (j == 0) 
 							{
@@ -477,8 +484,7 @@ package
 					}
 				}
 				
-				explodeRadialModelYZ(outer_shell_yellow, displacement_10);
-				explodeRadialModelYZ(outer_shell_red, displacement_9);
+				explodeRadialModelYZ(outer_shell, displacement_10);
 				explodeRadialModelYZ(pipes, displacement_8);
 				explodeRadialModelYZ(muons2left, displacement_7);
 				explodeRadialModelYZ(muons2right, displacement_7);
@@ -492,8 +498,7 @@ package
 				if (e.value.rotate_dthetaZ < -10.0)
 				{
 					reOrderContainers();
-					implodeRadialModelYZ(outer_shell_yellow);
-					implodeRadialModelYZ(outer_shell_red);
+					implodeRadialModelYZ(outer_shell);
 					implodeRadialModelYZ(pipes);
 					implodeRadialModelYZ(muons2left);
 					implodeRadialModelYZ(muons2right);
@@ -517,6 +522,7 @@ package
 		
 		private function onDrag(e:GWGestureEvent):void
 		{
+			var val:Number;
 			if (e.value.n == 3)
 			{
 				var x:int = e.value.localX;
@@ -525,7 +531,7 @@ package
 				directionalArrows.y = y;
 				fade(directionalArrows, "in");
 				
-				var val:Number = main.rotationX + e.value.drag_dy * .25;
+				val = main.rotationX + e.value.drag_dy * .25;
 			
 				if (val < minRotationX) val = minRotationX;
 				else if (val > maxRotationX) val = maxRotationX;
@@ -533,10 +539,9 @@ package
 				main.rotationY -= e.value.drag_dx * .5;
 				main.rotationX = val;
 			}
-			
-			if (e.value.n == 8)
+			else if (e.value.n == 8)
 			{
-				var val:Number = cam.rotationX + e.value.drag_dy * .25;
+				val = cam.rotationX + e.value.drag_dy * .25;
 			
 				if (val < minRotationX) val = minRotationX;
 				else if (val > maxRotationX) val = maxRotationX;
@@ -544,7 +549,6 @@ package
 				cam.rotationY -= e.value.drag_dx * .5;
 				cam.rotationX = val;
 			}
-				
 			else fade(directionalArrows, "out");
 		}
 		
@@ -662,7 +666,7 @@ package
 			for (var i:int = 0; i < degree; i++) 
 			{
 				// swith to radians for cosine and sine calculations
-				var radianValue = radians(totalRotation);
+				var radianValue:Number = radians(totalRotation);
 				
 				newZ = (displacement * ((-1)*Math.cos(radianValue)));
 				newY = (displacement * Math.sin(radianValue));

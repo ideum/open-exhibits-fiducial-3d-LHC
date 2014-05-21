@@ -9,7 +9,7 @@
 	</LibraryKit>
 
 	<!-- 3D Models, Nodes and Containers -->
-	<Include src="library/cml/model1.cml"/>
+	<Include src="library/cml/model.cml"/>
 	
 	<!-- Popup overlays for information -->
 	<Include src="library/cml/model-popups.cml"/>

@@ -2,41 +2,64 @@
 
 <cml>
 
-<ModelPopup id="shell1" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Outer Yellow Shell" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="This is the Outer Yellow Shell Popup" />	
+<ModelPopup id="blank_placeholder" width="525" height="300" mouseChildren="true">
+	<Graphic shape="rectangle" width="525" height="300" color="0x777777" lineStroke="0" alpha=".8"/>
+	<Text fontSize="18" x="20" y="5" width="500" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Blank Placeholder" />
+	<ScrollPane visible="true" width="480" y="45" height="230" paneStroke="0" scrollThickness="20" mouseChildren="true" targetParent="true" clusterBubbling="false">
+	
+		<!-- ScrollBar for styling-->
+		<ScrollBar buttonFill="0x333333" fill="0x555555" railShape="roundRectangle" thumbFill="0x303030" cornerHeight="15" cornerWidth="15" buttonVisible="false" />
+		
+		<Text fontSize="18" x="20" width="440" height="700" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true">	
+			<p>This item still needs to be assigned an appropriate description.</p>
+		</Text>
+
+		<!-- TouchContainer so dragging and scrolling can be set on or off, also to assist with making child events accesible provided there is no gesture conflict -->
+		<GestureList>
+			<Gesture ref="n-drag-inertia" gestureOn="true"/>
+			<Gesture ref="n-scale-inertia" gestureOn="true"/>
+			<Gesture ref="n-tap" gestureOn="true"/>
+		</GestureList>
+	</ScrollPane>
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
 	<Gesture ref="n-tap" />
 </ModelPopup>
 
-<ModelPopup id="shell2" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Outer Red Shell" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="This is the Outer Red Shell Popup" />	
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-tap" />
-</ModelPopup>
+<ModelPopup id="collider_tunnel" width="525" height="300" mouseChildren="true">
+	<Graphic shape="rectangle" width="525" height="300" color="0x777777" lineStroke="0" alpha=".8"/>
+	<Text fontSize="18" x="20" y="5" width="500" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Collider Tunnel" />
+	<ScrollPane visible="true" width="480" y="45" height="230" paneStroke="0" scrollThickness="20" mouseChildren="true" targetParent="true" clusterBubbling="false">
+	
+		<!-- ScrollBar for styling-->
+		<ScrollBar buttonFill="0x333333" fill="0x555555" railShape="roundRectangle" thumbFill="0x303030" cornerHeight="15" cornerWidth="15" buttonVisible="false" />
+		
+		<Text fontSize="18" x="20" width="440" height="700" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true">	
+			<p>The collider is contained in a circular tunnel, with a circumference of 27 kilometres (17 mi), 
+			at a depth ranging from 50 to 175 metres (164 to 574 ft) underground. The 3.8-metre (12 ft) 
+			wide concrete-lined tunnel, constructed between 1983 and 1988, was formerly used to house the 
+			Large Electron–Positron Collider.<br /></p>
+			<p>It crosses the border between Switzerland and France at four points, with most of it in France. 
+			Surface buildings hold ancillary equipment such as compressors, ventilation equipment, control 
+			electronics and refrigeration plants.<br /></p>
+			<p>The collider tunnel contains two adjacent parallel beamlines (or beam pipes) that intersect 
+			at four points, each containing a proton beam, which travel in opposite directions around the 
+			ring. Some 1,232 dipole magnets keep the beams on their circular path, while an additional 392
+			quadrupole magnets are used to keep the beams focused, in order to maximize the chances of 
+			interaction between the particles in the four intersection points, where the two beams will cross. 
+			In total, over 1,600 superconducting magnets are installed, with most weighing over 27 tonnes.  
+			Approximately 96 tonnes of superfluid helium 4 is needed to keep the magnets, made of copper-clad 
+			niobium-titanium, at their operating temperature of 1.9 K (−271.25 °C), making the LHC the largest 
+			cryogenic facility in the world at liquid helium temperature.</p>
+		</Text>
 
-<ModelPopup id="centerPopup" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Center" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="This is the Center Popup" />	
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-tap" />
-</ModelPopup>
-
-<ModelPopup id="tubePopup" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Left Tube" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="This is the Left Tube Popup" />	
+		<!-- TouchContainer so dragging and scrolling can be set on or off, also to assist with making child events accesible provided there is no gesture conflict -->
+		<GestureList>
+			<Gesture ref="n-drag-inertia" gestureOn="true"/>
+			<Gesture ref="n-scale-inertia" gestureOn="true"/>
+			<Gesture ref="n-tap" gestureOn="true"/>
+		</GestureList>
+	</ScrollPane>
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
 	<Gesture ref="n-tap" />
@@ -80,36 +103,6 @@
 	<Gesture ref="n-tap" />
 </ModelPopup>
 
-<ModelPopup id="pipesPopup" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Pipes" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="This is the Pipes Popup" />	
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-tap" />
-</ModelPopup>
-
-<ModelPopup id="shell3" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Inner Shell Red" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="Inner Shell Red Popup" />	
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-tap" />
-</ModelPopup>
-
-<ModelPopup id="shell4" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Inner Shell Blue" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="Inner Shell Blue Popup" />	
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-tap" />
-</ModelPopup>
-
 <ModelPopup id="toroid_magnets" width="525" height="300" mouseChildren="true">
 	<Graphic shape="rectangle" width="525" height="300" color="0x777777" lineStroke="0" alpha=".8"/>
 	<Text fontSize="18" x="20" y="5" width="500" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Toroid Magnet" />
@@ -143,17 +136,6 @@
 	<Gesture ref="n-tap" />
 </ModelPopup>
 
-
-<ModelPopup id="shell5" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Inner inner shell" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="Inner Inner Shell Popup" />	
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-tap" />
-</ModelPopup>
-
 <ModelPopup id="tile_calorimeter" width="525" height="300" mouseChildren="true">
 	<Graphic shape="rectangle" width="525" height="300" color="0x777777" lineStroke="0" alpha=".8"/>
 	<Text fontSize="18" x="20" y="5" width="500" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Tile Calorimeter" />
@@ -180,26 +162,6 @@
 			<Gesture ref="n-tap" gestureOn="true"/>
 		</GestureList>
 	</ScrollPane>
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-tap" />
-</ModelPopup>
-
-<ModelPopup id="blocksPopup" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Blocks" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="Blocks" />	
-	<Include src="library/cml/buttons/close-button.cml"/>
-	<Gesture ref="n-drag" />
-	<Gesture ref="n-tap" />
-</ModelPopup>
-
-<ModelPopup id="inner_gears" width="500" height="475">
-	<Graphic shape="rectangle" width="500" height="475" color="0xff00cc" lineStroke="0" alpha=".8"/>
-	<Text fontSize="18" x="20" y="20" width="440" height="30" font="OpenSansBold" color="0xffffff" toBitmap="true" str="Inner Gears" />
-	<Text fontSize="18" x="20" y="85" width="440" height="500" color="0xffffff" toBitmap="true" multiline="true" wordWrap="true"
-		str="Inner Gears" />	
 	<Include src="library/cml/buttons/close-button.cml"/>
 	<Gesture ref="n-drag" />
 	<Gesture ref="n-tap" />

@@ -126,6 +126,8 @@ package
 
 			// Add model to 3D scene 
 			overlay.addChild(model_container);
+			
+
 		
 			// add child gestures
 			overlay.mouseChildren = true;
@@ -153,6 +155,12 @@ package
 			
 			// grab all of the cml popup elements
 			popups = document.getElementsByTagName(ModelPopup);
+			
+			// Add popups to overlay as well
+			for (var i:int = 0; i < popups.length; i++)
+			{
+				overlay.addChild(popups[i]);
+			}
 			
 			// grab all of the cml model elements
 			models = document.getElementsByTagName(Model);
@@ -212,21 +220,9 @@ package
 			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.SCALE, onScale);
 			document.getElementById("inner_inner_shell").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
-			document.getElementById("inner_ringFront").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("inner_ringFront").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("inner_ringFront").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
-
-			document.getElementById("inner_ringBack").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("inner_ringBack").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("inner_ringBack").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
-			
-			document.getElementById("inner_inner_ringFront").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("inner_inner_ringFront").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("inner_inner_ringFront").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
-
-			document.getElementById("inner_inner_ringBack").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("inner_inner_ringBack").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("inner_inner_ringBack").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			document.getElementById("inner_ring").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("inner_ring").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("inner_ring").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
 			document.getElementById("inner_ringLeft").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			document.getElementById("inner_ringLeft").vto.addEventListener(GWGestureEvent.SCALE, onScale);
@@ -236,24 +232,9 @@ package
 			document.getElementById("inner_ringRight").vto.addEventListener(GWGestureEvent.SCALE, onScale);
 			document.getElementById("inner_ringRight").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 			
-			/*document.getElementById("engine").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("engine").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			
-			document.getElementById("engine_nose").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("engine_nose").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			
-			document.getElementById("engine_tail").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("engine_tail").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			
-			document.getElementById("rod").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("rod").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			
-			document.getElementById("rotor1").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("rotor1").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			
-			document.getElementById("front_fan").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
-			document.getElementById("front_fan").vto.addEventListener(GWGestureEvent.SCALE, onScale);
-			document.getElementById("front_fan").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);*/
+			document.getElementById("inner_cylinder").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			document.getElementById("inner_cylinder").vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			document.getElementById("inner_cylinder").vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 				
 			//mainScreen.addEventListener(GWGestureEvent.TAP, onTap);
 			overlay.addEventListener(GWGestureEvent.ROTATE, onRotate);
@@ -313,10 +294,23 @@ package
 			}
 		}
 		
+		private function onPopupDrag(e:GWGestureEvent):void 
+		{
+			var current_popup:ModelPopup = document.getElementById(e.target.id);
+			
+			if (e.value.n == 1)
+			{
+				current_popup.y += e.value.drag_dy;
+				current_popup.x += e.value.drag_dx;
+			}
+		}
+		
 		private function onRotate(e:GWGestureEvent):void 
 		{
 			if (e.value.n == 5)
 			{
+				var displacement_10:Number = e.value.rotate_dthetaZ * 10;
+				var displacement_9:Number = e.value.rotate_dthetaZ * 9;
 				var displacement_8:Number = e.value.rotate_dthetaZ * 8;
 				var displacement_7:Number = e.value.rotate_dthetaZ * 7;
 				var displacement_6:Number = e.value.rotate_dthetaZ * 6;
@@ -331,113 +325,167 @@ package
 				{
 					var final_position:Number = 0;
 					
+					if (containers[i].id == "container03") 
+					{
+						var centralModel:Model = containers[i].getChildAt(0);
+						var childrenCount:int = centralModel.numChildren;
+					
+						// loop through each of the elements in the model
+						for (var j:int = 0; j < childrenCount; j++) 
+						{
+							if (j == 5) 
+							{
+								centralModel.getChildAt(j).x += displacement_2;
+								final_position = centralModel.getChildAt(j).x;
+								if (final_position < 0) centralModel.getChildAt(j).x = 0;
+							}
+							else if (j == 6) 
+							{
+								centralModel.getChildAt(j).x += displacement_3;
+								final_position = centralModel.getChildAt(j).x;
+								if (final_position < 0) centralModel.getChildAt(j).x = 0;
+							}
+							else if (j == 7) 
+							{
+								centralModel.getChildAt(j).x -= displacement_2;
+								final_position = centralModel.getChildAt(j).x;
+								if (final_position > 0) centralModel.getChildAt(j).x = 0;
+							}
+							else if (j == 8) 
+							{
+								centralModel.getChildAt(j).x -= displacement_3;
+								final_position = centralModel.getChildAt(j).x;
+								if (final_position > 0) centralModel.getChildAt(j).x = 0;
+							}
+						}
+					}
 					if (containers[i].id == "container04") 
 					{
-						containers[i].moveLeft(displacement_5);
+						containers[i].moveLeft(displacement_10);
 						final_position = containers[i].x;
 					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container05") 
 					{
-						containers[i].moveRight(displacement_5);
+						containers[i].moveRight(displacement_10);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container07") 
 					{
-						containers[i].moveLeft(displacement_4);
+						containers[i].moveLeft(displacement_9);
 						final_position = containers[i].x;
 					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container08") 
 					{
-						containers[i].moveRight(displacement_4);
+						containers[i].moveRight(displacement_9);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container11") 
 					{
-						containers[i].moveLeft(displacement_3);	
+						containers[i].moveLeft(displacement_8);	
 						final_position = containers[i].x;2
 					    if (final_position > 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container12") 
 					{
-						containers[i].moveRight(displacement_3);
+						containers[i].moveRight(displacement_8);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
 					else if (containers[i].id == "container14") 
 					{
-						containers[i].moveForward(displacement_2);
-						final_position = containers[i].z;
-					    if (final_position < 0) containers[i].z = 0;
-					}
-					else if (containers[i].id == "container15") 
-					{
-						containers[i].moveBackward(displacement_2);
-						final_position = containers[i].z;
-					    if (final_position > 0) containers[i].z = 0;
-					}
-					else if (containers[i].id == "container16") 
-					{
-						containers[i].moveForward(displacement_2);
-						final_position = containers[i].z;
-					    if (final_position < 0) containers[i].z = 0;
-					}
-					else if (containers[i].id == "container17") 
-					{
-						containers[i].moveBackward(displacement_2);
-						final_position = containers[i].z;
-					    if (final_position > 0) containers[i].z = 0;
+						var centralModel:Model = containers[i].getChildAt(0);
+						var childrenCount:int = centralModel.numChildren;
+					
+						// loop through each of the elements in the model
+						for (var j:int = 0; j < childrenCount; j++) 
+						{
+							if (j == 0) 
+							{
+								centralModel.getChildAt(j).z += displacement_5;
+								final_position = centralModel.getChildAt(j).z;
+								if (final_position < 0) centralModel.getChildAt(j).z = 0;
+							}
+							else if (j == 1) 
+							{
+								centralModel.getChildAt(j).z += displacement_4;
+								final_position = centralModel.getChildAt(j).z;
+								if (final_position < 0) centralModel.getChildAt(j).z = 0;
+							}
+							else if (j == 2) 
+							{
+								centralModel.getChildAt(j).z -= displacement_4;
+								final_position = centralModel.getChildAt(j).z;
+								if (final_position > 0) centralModel.getChildAt(j).z = 0;
+							}
+							else if (j == 3) 
+							{
+								centralModel.getChildAt(j).z -= displacement_5;
+								final_position = centralModel.getChildAt(j).z;
+								if (final_position > 0) centralModel.getChildAt(j).z = 0;
+							}
+						}
 					}
 					else if (containers[i].id == "container19") 
 					{
-						containers[i].moveLeft(displacement_1);
+						containers[i].moveLeft(displacement_5);
 						final_position = containers[i].z;
 					    if (final_position > 0) containers[i].z = 0;
 					}
 					else if (containers[i].id == "container20")
 					{
-						containers[i].moveRight(displacement_1);
+						containers[i].moveRight(displacement_5);
 						final_position = containers[i].x;
 					    if (final_position < 0) containers[i].x = 0;
 					}
-					/*else if (containers[i].id == "container11") 
+					else if (containers[i].id == "container21") 
 					{
-						containers[i].moveRight(fast_displacement);
-						final_position = containers[i].x;
-						if (final_position < 0) containers[i].x = 0;
+						var centralModel:Model = containers[i].getChildAt(0);
+						var childrenCount:int = centralModel.numChildren;
+					
+						// loop through each of the elements in the model
+						for (var j:int = 0; j < childrenCount; j++) 
+						{
+							if (j == 0) 
+							{
+								centralModel.getChildAt(j).z += displacement_3;
+								final_position = centralModel.getChildAt(j).z;
+								if (final_position < 0) centralModel.getChildAt(j).z = 0;
+							}
+							else if (j == 1) 
+							{
+								centralModel.getChildAt(j).z += displacement_2;
+								final_position = centralModel.getChildAt(j).z;
+								if (final_position < 0) centralModel.getChildAt(j).z = 0;
+							}
+							else if (j == 2) 
+							{
+								centralModel.getChildAt(j).z -= displacement_2;
+								final_position = centralModel.getChildAt(j).z;
+								if (final_position > 0) centralModel.getChildAt(j).z = 0;
+							}
+							else if (j == 3) 
+							{
+								centralModel.getChildAt(j).z -= displacement_3;
+								final_position = centralModel.getChildAt(j).z;
+								if (final_position > 0) centralModel.getChildAt(j).z = 0;
+							}
+						}
 					}
-					else if (containers[i].id == "container12") 
-					{
-						containers[i].moveRight(slow_displacement);	
-						final_position = containers[i].x;
-						if (final_position < 0) containers[i].x = 0;
-					}
-					else if (containers[i].id == "container13") 
-					{
-						containers[i].moveLeft(slow_displacement);
-						final_position = containers[i].x;
-						if (final_position > 0) containers[i].x = 0;
-					}
-					else if (containers[i].id == "container19") 
-					{
-						containers[i].moveLeft(fast_displacement);
-						final_position = containers[i].x;
-						if (final_position > 0) containers[i].x = 0;
-					}*/
 				}
 				
-				explodeRadialModelYZ(outer_shell_yellow, displacement_6);
-				explodeRadialModelYZ(outer_shell_red, displacement_5);
-				explodeRadialModelYZ(pipes, displacement_5);
-				explodeRadialModelYZ(muons2left, displacement_4);
-				explodeRadialModelYZ(muons2right, displacement_4);
-				explodeRadialModelYZ(innerShell, displacement_4);
-				explodeRadialModelYZ(innerShellBlue, displacement_3);
-				explodeRadialModelYZ(inner_inner_shell, displacement_2);
-				explodeRadialModelYZ(blocks, displacement_3);
+				explodeRadialModelYZ(outer_shell_yellow, displacement_10);
+				explodeRadialModelYZ(outer_shell_red, displacement_9);
+				explodeRadialModelYZ(pipes, displacement_8);
+				explodeRadialModelYZ(muons2left, displacement_7);
+				explodeRadialModelYZ(muons2right, displacement_7);
+				explodeRadialModelYZ(innerShell, displacement_7);
+				explodeRadialModelYZ(innerShellBlue, displacement_6);
+				explodeRadialModelYZ(inner_inner_shell, displacement_5);
+				explodeRadialModelYZ(blocks, displacement_4);
 				
 				// re-orient the containers back to their original orientation
 				// negates viewer interaction and rotation

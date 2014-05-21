@@ -144,34 +144,7 @@
 			</Container3D>
 	
 			<Container3D id='container14'>
-				<Model id="inner_ringBack" name="tile_calorimeter" src="library/assets/model/inner_ring/inner_ringBack.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
-					<Gesture ref="n-drag-3d"/>
-					<Gesture ref="n-rotate-3d"/>
-					<Gesture ref="n-tap"/>
-					<Gesture ref="n-drag"/>
-				</Model>
-			</Container3D>
-			
-			<Container3D id='container15'>
-				<Model id="inner_ringFront" name="tile_calorimeter" src="library/assets/model/inner_ring/inner_ringFront.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
-					<Gesture ref="n-drag-3d"/>
-					<Gesture ref="n-rotate-3d"/>
-					<Gesture ref="n-tap"/>
-					<Gesture ref="n-drag"/>
-				</Model>
-			</Container3D>
-			
-			<Container3D id='container16'>
-				<Model id="inner_inner_ringBack" name="tile_calorimeter" src="library/assets/model/inner_ring/inner_inner_ringBack.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
-					<Gesture ref="n-drag-3d"/>
-					<Gesture ref="n-rotate-3d"/>
-					<Gesture ref="n-tap"/>
-					<Gesture ref="n-drag"/>
-				</Model>
-			</Container3D>
-			
-			<Container3D id='container17'>
-				<Model id="inner_inner_ringFront" name="tile_calorimeter" src="library/assets/model/inner_ring/inner_inner_ringFront.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="inner_ring" name="tile_calorimeter" src="library/assets/model/inner_ring/inner_ring.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -199,6 +172,15 @@
 			
 			<Container3D id='container20'>
 				<Model id="inner_ringRight" name="inner_gears" src="library/assets/model/inner_ring/inner_ringRight.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+					<Gesture ref="n-drag-3d"/>
+					<Gesture ref="n-rotate-3d"/>
+					<Gesture ref="n-tap"/>
+					<Gesture ref="n-drag"/>
+				</Model>
+			</Container3D>
+			
+			<Container3D id='container21'>
+				<Model id="inner_cylinder" name="argon_calorimeter" src="library/assets/model/inner_cylinder/inner_cylinder.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>

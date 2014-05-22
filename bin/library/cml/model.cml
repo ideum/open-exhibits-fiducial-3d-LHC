@@ -45,16 +45,7 @@
 			</Container3D>
 			
 			<Container3D id='container04'>
-				<Model id="left_tube" name="collider_tunnel" src="library/assets/model/main_tube/left_tube.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
-					<Gesture ref="n-drag-3d"/>
-					<Gesture ref="n-rotate-3d"/>
-					<Gesture ref="n-tap"/>
-					<Gesture ref="n-drag"/>
-				</Model>
-			</Container3D>
-			
-			<Container3D id='container05'>
-				<Model id="right_tube" name="collider_tunnel" src="library/assets/model/main_tube/right_tube.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="tunnel" name="collider_tunnel" src="library/assets/model/main_tube/tunnel.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>
@@ -144,16 +135,7 @@
 			</Container3D>
 			
 			<Container3D id='container19'>
-				<Model id="inner_ringLeft" name="blank_placeholder" src="library/assets/model/inner_ring/inner_ringLeft.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
-					<Gesture ref="n-drag-3d"/>
-					<Gesture ref="n-rotate-3d"/>
-					<Gesture ref="n-tap"/>
-					<Gesture ref="n-drag"/>
-				</Model>
-			</Container3D>
-			
-			<Container3D id='container20'>
-				<Model id="inner_ringRight" name="blank_placeholder" src="library/assets/model/inner_ring/inner_ringRight.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
+				<Model id="inner_gears" name="blank_placeholder" src="library/assets/model/inner_ring/inner_gears.awd" lightPicker="lp-1" touchEnabled="true" sca=".25, .25, .25">
 					<Gesture ref="n-drag-3d"/>
 					<Gesture ref="n-rotate-3d"/>
 					<Gesture ref="n-tap"/>

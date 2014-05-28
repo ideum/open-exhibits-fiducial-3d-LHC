@@ -10,7 +10,7 @@
 	<Container id="point_dial" visible="false">
 		<Gesture ref="n-drag"/>
 		<Gesture ref="n-rotate"/>
-		<Image width="500" height="548" x="-250" y="-274" mouseChildren="false" src="library/assets/dial/RotatingArrow.png"></Image>
+		<Image id="rotation_graphic" width="500" height="548" x="-250" y="-274" mouseChildren="false" src="library/assets/dial/RotatingArrow.png"></Image>
     </Container>
 	
 </cml>

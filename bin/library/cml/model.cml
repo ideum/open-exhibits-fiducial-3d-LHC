@@ -2,7 +2,6 @@
 
 <cml>
 	<TouchContainer3D id="model_container" mouseChildren="true">
-	
 		<!-- <LightPicker id="lp-1" lights="light-1, light-2, light-3" /> -->
 		<LightPicker id="lp-1" lights="light-1" />
 

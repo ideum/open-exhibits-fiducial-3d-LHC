@@ -9,7 +9,7 @@
 	
 	<Container id="directionalArrows" visible="false">
 		<Gesture ref="n-drag"/>
-		<Image width="500" height="500" x="-250" y="-250" mouseChildren="false" src="library/assets/directionalArrows/directionalArrows.png"></Image>
+		<Image id="translation_graphic" width="500" height="500" x="-250" y="-250" mouseChildren="false" src="library/assets/directionalArrows/directionalArrows.png"></Image>
     </Container>
 	
 </cml>

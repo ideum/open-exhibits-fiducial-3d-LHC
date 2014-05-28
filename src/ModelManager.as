@@ -68,6 +68,12 @@ package
 		private var innerShellBlue:Model;
 		private var inner_inner_shell:Model;
 		private var blocks:Model;
+		private var center:Model;
+		
+		private var rotationGraphic:Image;
+		private var translationGraphic:Image;
+		
+		//private var centerPopup:ModelPopup;
 		
 		private var minScale:Number = .25;
 		private var maxScale:Number = 4;
@@ -148,12 +154,24 @@ package
 			innerShellBlue = document.getElementById("innerShellBlue");
 			inner_inner_shell = document.getElementById("inner_inner_shell");
 			blocks = document.getElementById("blocks");
+			center = document.getElementById("center");
+			rotationGraphic = document.getElementById("rotation_graphic");
+			translationGraphic = document.getElementById("translation_graphic");
+			
+			//centerPopup = document.getElementById("trt_tracker");
 			
 			// grab all of the cml popup elements
 			popups = document.getElementsByTagName(ModelPopup);
 			
 			// Add popups to overlay as well
 			for (var i:int = 0; i < popups.length; i++)
+			{
+				overlay.addChild(popups[i]);
+			}
+			
+			var centerPopups:Array
+			// Add popups to overlay as well
+			for (var i:int = 0; i < center.numChildren; i++)
 			{
 				overlay.addChild(popups[i]);
 			}
@@ -195,6 +213,10 @@ package
 			blocks.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			blocks.vto.addEventListener(GWGestureEvent.SCALE, onScale);
 			blocks.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
+			
+			center.vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
+			center.vto.addEventListener(GWGestureEvent.SCALE, onScale);
+			center.vto.addEventListener(GWGestureEvent.TAP, onHotspotTap);
 
 			document.getElementById("gears").vto.addEventListener(GWGestureEvent.DRAG, onModelDrag);
 			document.getElementById("gears").vto.addEventListener(GWGestureEvent.SCALE, onScale);
@@ -289,6 +311,13 @@ package
 		{
 			if (e.value.n == 5)
 			{
+				var imageScale:Number = e.target.cO.width / rotationGraphic.width;
+				
+				rotationGraphic.scaleX = imageScale * 2;
+				rotationGraphic.scaleY = imageScale * 2;
+				rotationGraphic.x = -250*(imageScale*2);
+				rotationGraphic.y = -250*(imageScale*2);
+
 				var displacement_10:Number = e.value.rotate_dthetaZ * 10;
 				var displacement_9:Number = e.value.rotate_dthetaZ * 9;
 				var displacement_8:Number = e.value.rotate_dthetaZ * 8;
@@ -572,6 +601,18 @@ package
 				directionalArrows.x = x;
 				directionalArrows.y = y;
 				fade(directionalArrows, "in");
+				
+				var imageScale:Number = e.target.cO.width / translationGraphic.width;
+				
+				x = e.value.localX;
+				y = e.value.localY;
+				point_dial.x = x;
+				point_dial.y = y;
+
+				translationGraphic.scaleX = imageScale*2;
+				translationGraphic.scaleY = imageScale * 2;
+				translationGraphic.x = -250*(imageScale*2);
+				translationGraphic.y = -250*(imageScale*2);
 				
 				val = main.rotationX + e.value.drag_dy * .25;
 			
